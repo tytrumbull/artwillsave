@@ -1,0 +1,88 @@
+# Editor dashboard (Decap CMS) at artwillsave.com/admin
+backend:
+  name: github
+  repo: tytrumbull/artwillsave
+  branch: main
+
+# Drafts sit in a "Drafts / In review / Ready" board until you publish them.
+publish_mode: editorial_workflow
+
+media_folder: src/assets/uploads
+public_folder: /assets/uploads
+site_url: https://artwillsave.com
+display_url: https://artwillsave.com
+locale: en
+
+i18n:
+  structure: multiple_files
+  locales: [en, fr, es]
+  default_locale: en
+
+collections:
+  - name: stories
+    label: Stories
+    label_singular: Story
+    description: >
+      Paste the story into the tab for the language it was written in (EN, FR or ES).
+      Fill the other tabs with translations, or leave them empty and run the
+      translation workflow on GitHub. Anything left empty shows the original text.
+    folder: stories
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: working_title
+    slug: "{{working_title}}"
+    summary: "{{working_title}} by {{author}}"
+    sortable_fields: [date, working_title, author]
+    i18n: true
+    fields:
+      - label: Working title
+        name: working_title
+        widget: string
+        hint: For your list and the web address. Any language. Readers don't see this.
+        i18n: duplicate
+      - label: Author (as it should appear)
+        name: author
+        widget: string
+        i18n: duplicate
+      - label: Author link
+        name: author_link
+        widget: string
+        required: false
+        i18n: duplicate
+      - label: Original language
+        name: original_language
+        widget: select
+        options:
+          - { label: English, value: en }
+          - { label: French, value: fr }
+          - { label: Spanish, value: es }
+        i18n: duplicate
+      - label: For adults
+        name: mature
+        widget: boolean
+        default: false
+        hint: Shows a warning screen first. Nothing is hidden or cut.
+        i18n: duplicate
+      - label: Published
+        name: date
+        widget: datetime
+        i18n: duplicate
+      - label: Title
+        name: title
+        widget: string
+        required: false
+        i18n: true
+      - label: Content note
+        name: content_note
+        widget: string
+        required: false
+        hint: Shown on the warning screen for adult stories, e.g. "Grief, drug use".
+        i18n: true
+      - label: Story
+        name: body
+        widget: markdown
+        required: false
+        buttons: [italic, bold, quote]
+        editor_components: []
+        i18n: true

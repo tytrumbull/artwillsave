@@ -1,0 +1,39 @@
+# Run from GitHub: Actions tab > "Translate missing languages" > Run workflow.
+# Translates any published story that's missing English, French or Spanish,
+# then opens a pull request so you can read the translations before they go live.
+# Needs a repository secret named ANTHROPIC_API_KEY (Settings > Secrets and variables > Actions).
+
+name: Translate missing languages
+
+on:
+  workflow_dispatch:
+    inputs:
+      story:
+        description: "One story's file name without .en.md (leave empty for all)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci || npm install
+      - run: node scripts/translate.js ${{ github.event.inputs.story }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: translations/${{ github.run_number }}
+          commit-message: "Add translations"
+          title: "Translations to review"
+          body: |
+            New translations made by the translation workflow.
+            Netlify posts a preview link below. Read them there, fix anything in the Files tab, then merge to publish.

@@ -1,0 +1,19 @@
+{
+  "name": "artwillsave",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Short stories on stickers. Scan one, read a random story.",
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node build.js && node scripts/serve.js",
+    "translate": "node scripts/translate.js",
+    "qr": "node scripts/make-qr.js"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^14.1.4"
+  },
+  "devDependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

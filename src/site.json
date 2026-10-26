@@ -1,0 +1,9 @@
+{
+  "name": "Art Will Save",
+  "url": "https://artwillsave.com",
+  "languages": ["en", "fr", "es"],
+  "default_language": "en",
+  "max_words": 2500,
+  "support_url": "",
+  "contact_email": ""
+}
