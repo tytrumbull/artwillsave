@@ -21,7 +21,6 @@ Everything here runs on free tiers: GitHub for the files, Netlify for hosting an
 1. Create a free account at github.com if you don't have one.
 2. New repository, name it `artwillsave`, private or public (either works).
 3. Upload every file in this folder (drag the contents of the unzipped folder onto the "upload files" page). Skip `node_modules` and `_site` if they're there.
-4. Open `src/admin/config.yml` and change `REPLACE_WITH_GITHUB_USERNAME` to your GitHub username. Commit.
 
 ### 2. Host it on Netlify
 1. Sign up at netlify.com with your GitHub account (Free plan).
